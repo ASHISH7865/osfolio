@@ -1,0 +1,19 @@
+.cursor-blink {
+    animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% {
+        border-color: transparent;
+    }
+    25%, 75% {
+        border-color: currentColor;
+    }
+}
+
+.blink {
+    display: inline-block;
+    margin-left: 2px; /* Adjust based on your font size */
+    border-right: 2px solid;
+    line-height: 1;
+}
