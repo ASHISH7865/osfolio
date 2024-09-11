@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Window as WindowType } from '@/types/types';
-import { LayoutGrid, Lock } from 'lucide-react';
+import { Battery, LayoutGrid, Lock, Wifi } from 'lucide-react';
 import { Button } from '../ui/button';
 import Clock from '../LoginScreen/Clock';
 
@@ -43,18 +43,18 @@ const Taskbar: React.FC<TaskbarProps> = React.memo(({
                             key={item.id}
                             onClick={() => onWindowClick(item.id)}
                             className={`
-                            flex items-center px-2 py-1 rounded-[5px] transition-colors duration-200
+                            flex items-center px-2 py-1  gap-1 rounded-[5px] transition-colors duration-200
                             ${item.isActive ? 'bg-gray-600' : 'hover:bg-gray-700'}
                             ${item.isMinimized ? 'opacity-50' : 'opacity-100'}
                         `}
-                        >
-                            <span className="text-white text-sm truncate max-w-[120px]">{item.name}</span>
+                        >   
+                            <img className='w-[20px]' src={item.icon} alt="app-icon" />
+                            {/* <span className="text-white text-xs truncate max-w-[120px]">{item.name}</span> */}
                         </button>
                     ))}
                 </div>
             </div>
-            <div className='flex gap-2 items-center'>
-
+            <div className='flex gap-3 items-center'>
                 <Button
                     variant="ghost"
                     onClick={onLock}
@@ -63,6 +63,8 @@ const Taskbar: React.FC<TaskbarProps> = React.memo(({
                 >
                     <Lock size={20} />
                 </Button>
+                <Wifi size={20} />
+                <Battery size={20} />
                 <Clock className='text-sm' />
             </div>
         </div>

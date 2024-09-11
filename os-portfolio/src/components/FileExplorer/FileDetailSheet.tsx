@@ -10,6 +10,7 @@ interface FileDetailsSheetProps {
 }
 
 const FileDetailsSheet: React.FC<FileDetailsSheetProps> = ({ isOpen, onOpenChange, selectedNode }) => {
+    console.log(selectedNode)
     return (
         <Sheet open={isOpen} onOpenChange={onOpenChange}>
             <SheetContent>

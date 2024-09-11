@@ -1,6 +1,6 @@
 import React from 'react';
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { EllipsisVertical, FolderArchive, Star, Trash2 } from 'lucide-react';
+import { EllipsisVertical, FolderArchive, Info, Star, Trash2 } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { FileSystemNode } from '@/types/types';
 
@@ -13,7 +13,6 @@ interface FolderCardProps {
 
 const FolderCard: React.FC<FolderCardProps> = React.memo(({ node, onDoubleClick, onDelete, onClick }) => (
   <div 
-    onClick={onClick} 
     onDoubleClick={onDoubleClick} 
     className="p-6 w-[300px] border rounded-[10px] cursor-pointer hover:bg-[#34343b] bg-[#26262e] active:bg-[#34343b]"
   >
@@ -36,7 +35,12 @@ const FolderCard: React.FC<FolderCardProps> = React.memo(({ node, onDoubleClick,
               <Trash2 size={20} className='text-red-500' />
               <span>Delete</span>
             </DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem className='flex gap-4 text-xs rounded-[5px] p-2' onClick={onClick}>
+              <Info size={20} />
+              <span>Properties</span>
+            </DropdownMenuCheckboxItem>
           </DropdownMenuContent>
+          
         </DropdownMenu>
       </div>
       <div className='flex flex-col gap-1 items-center'>
