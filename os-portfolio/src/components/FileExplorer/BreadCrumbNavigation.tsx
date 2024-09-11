@@ -32,7 +32,7 @@ const BreadcrumbNavigation: React.FC = () => {
           <React.Fragment key={node.id}>
             {index > 0 && <span> / </span>}
             <span 
-              className="breadcrumb-item"
+              className="breadcrumb-item cursor-pointer"
               onClick={() => handleClick(node.id)}
             >
               {node.name}

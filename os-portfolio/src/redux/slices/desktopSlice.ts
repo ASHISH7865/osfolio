@@ -8,7 +8,7 @@ interface DesktopState {
 }
 
 const initialState: DesktopState = {
-  apps: [{ id: "fileExplorer", name: "File Explorer", icon: "/public/icons/folder-icon.svg" }],
+  apps: [{ id: "file-explorer", name: "Explorer", icon: "/public/icons/folder-icon.svg" , type:"explorer" }],
   openWindows: [],
   activeWindowId: null,
 };
@@ -36,7 +36,7 @@ const desktopSlice = createSlice({
             x: 50 + state.openWindows.length * 20,
             y: 50 + state.openWindows.length * 20,
           },
-          size: { width: 600, height: 600 },
+          size: { width: 1000, height: 600 },
           zIndex:
             Math.max(0, ...state.openWindows.map((w) => w.zIndex || 0)) + 1,
         };

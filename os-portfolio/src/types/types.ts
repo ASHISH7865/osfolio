@@ -2,6 +2,7 @@ export interface App {
     id: string;
     name: string;
     icon: string;
+    type: string;
     description?: string;
     launchCommand?: string;
   }
@@ -29,6 +30,7 @@ export interface App {
   export interface BaseNode {
     id: string;
     name: string;
+    icon?: string;
     createdAt: string;
     modifiedAt: string;
     parentId: string | null;
@@ -43,6 +45,7 @@ export interface App {
   
   export interface Folder extends BaseNode {
     type: 'folder';
+    size?:number;
     children: string[];
   }
   

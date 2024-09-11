@@ -1,27 +1,20 @@
 import React, { useCallback, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/redux/store';
-import { setCurrentDirectory, createNode, deleteNode } from '@/redux/slices/fileSlice';
+import { createNode } from '@/redux/slices/fileSlice';
 import { FileSystemNode } from '@/types/types';
+import TabComponent from './TabComponent';
+
 
 const FileExplorer: React.FC = () => {
     const dispatch = useDispatch();
     const { fileSystem, currentDirectory } = useSelector((state: RootState) => state.files);
 
-    const currentFolder = useMemo(() => 
+    const currentFolder = useMemo(() =>
         fileSystem[currentDirectory] as FileSystemNode & { type: 'folder' },
         [fileSystem, currentDirectory]
     );
 
-    console.log(currentFolder)
-
-    const handleDoubleClick = useCallback((node: FileSystemNode) => {
-        if (node.type === 'folder') {
-            dispatch(setCurrentDirectory(node.id));
-        } else {
-            console.log('Opening file:', node.name);
-        }
-    }, [dispatch]);
 
     const handleCreateFolder = useCallback(() => {
         const newFolderId = `folder-${Date.now()}`;
@@ -36,29 +29,25 @@ const FileExplorer: React.FC = () => {
         }));
     }, [dispatch, currentDirectory]);
 
-    const handleDelete = useCallback((nodeId: string) => {
-        dispatch(deleteNode(nodeId));
-    }, [dispatch]);
+   
 
     return (
-        <div className="file-explorer relative">
-            <div className="file-explorer-header">
-                <h2>{currentFolder?.name}</h2>
-                <button onClick={handleCreateFolder}>New Folder</button>
+        <div className="p-6">
+            <div className="flex space-x-4 mb-8">
+                <ActionButton onClick={handleCreateFolder} icon="+" label="New document" />
             </div>
-            <ul className="file-explorer-list">
-                {currentFolder?.children?.map(childId => {
-                    const child = fileSystem[childId];
-                    return (
-                        <li key={child.id} onDoubleClick={() => handleDoubleClick(child)}>
-                            {child?.name}
-                            <button onClick={() => handleDelete(child.id)}>Delete</button>
-                        </li>
-                    );
-                })}
-            </ul>
+            <TabComponent items={currentFolder?.children} />
+           
         </div>
     );
 };
+
+const ActionButton: React.FC<{ icon: string; label: string , onClick:()=>void }> = ({ icon, label,onClick }) => (
+    <button onClick={onClick} className="flex items-center justify-center border w-[200px] h-[80px] hover:bg-gray-900 text-white font-bold py-2 px-4 rounded">
+        <span className="mr-2">{icon}</span>
+        {label}
+    </button>
+);
+
 
 export default React.memo(FileExplorer);

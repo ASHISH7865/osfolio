@@ -1,46 +1,16 @@
 import { File, FileSystem, FileSystemNode } from '@/types/types';
+import { portfolioFileSystem } from '@/utils/fileSystem';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Enhanced types for the file system
 
 
-interface FilesState {
+export interface FilesState {
   fileSystem: FileSystem;
   currentDirectory: string;
 }
 
-const initialState: FilesState = {
-  fileSystem: {
-    'root': {
-      id: 'root',
-      name: 'Root',
-      type: 'folder',
-      children: ['Desktop', 'Documents'],
-      createdAt: new Date().toISOString(),
-      modifiedAt: new Date().toISOString(),
-      parentId: null,
-    },
-    'Desktop': {
-      id: 'Desktop',
-      name: 'Desktop',
-      type: 'folder',
-      children: ['About.txt', 'Projects'],
-      createdAt: new Date().toISOString(),
-      modifiedAt: new Date().toISOString(),
-      parentId: 'root',
-    },
-    'Documents' :{
-      id: 'Documents',
-      name: 'Documents',
-      type: 'folder',
-      children: ['Resume.txt'],
-      createdAt: new Date().toISOString(),
-      modifiedAt: new Date().toISOString(),
-      parentId: 'root',
-    }
-  },
-  currentDirectory: 'root',
-};
+const initialState: FilesState = portfolioFileSystem;
 
 const filesSlice = createSlice({
   name: 'files',
